@@ -1,0 +1,1 @@
+# Vendor accounts management system for small dairy products distributor business

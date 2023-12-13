@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR (255) NOT NULL,
     status BOOLEAN NOT NULL DEFAULT TRUE
 );
+
 CREATE TABLE IF NOT EXISTS customers (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR (50) UNIQUE NOT NULL,
@@ -74,4 +75,12 @@ CREATE TABLE IF NOT EXISTS customer_transactions (
         updated_by INTEGER REFERENCES users(id),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- INSERT QUERIES
+INSERT INTO users (
+ name, email, role, password, status
+) VALUES (
+  'sushant', 'sushant@email.com', 'isSuperAdmin', '12345678', TRUE
 );

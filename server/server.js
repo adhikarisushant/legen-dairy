@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { ErrorMiddleware } from "./middleware/error.js";
 import userRouter from "./routes/user.route.js";
+import customerRouter from "./routes/customer.route.js";
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -17,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use("/api/v1", userRouter);
+app.use("/api/v1", userRouter, customerRouter);
 
 // testing api
 app.get("/test", async (req, res, next) => {
@@ -25,20 +26,6 @@ app.get("/test", async (req, res, next) => {
     success: true,
     message: "API is working",
   });
-
-  // try {
-  //   const getUsers = await db.query("select * from users;");
-
-  //   res.status(200).json({
-  //     status: "success",
-  //     results: getUsers.rows.length,
-  //     data: {
-  //       users: getUsers.rows,
-  //     },
-  //   });
-  // } catch (err) {
-  //   console.log(err);
-  // }
 });
 // unknown api route
 app.all("*", (req, res, next) => {

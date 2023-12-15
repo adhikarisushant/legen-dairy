@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import db from "../db/index.js";
 import { CatchAsyncError } from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import cookie from "cookie";
 
 export const registerUser = CatchAsyncError(async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ export const registerUser = CatchAsyncError(async (req, res, next) => {
       [email]
     );
 
-    if (isEmailExist?.rows[0]?.email === email) {
+    if (isEmailExist?.rows.length > 0) {
       return next(new ErrorHandler("Email already exists", 400));
     }
 
@@ -22,7 +23,7 @@ export const registerUser = CatchAsyncError(async (req, res, next) => {
       [name]
     );
 
-    if (isNameExist?.rows[0]?.name === name) {
+    if (isNameExist?.rows.length > 0) {
       return next(new ErrorHandler("Name already exists", 400));
     }
 
@@ -52,11 +53,11 @@ export const loginUser = CatchAsyncError(async (req, res, next) => {
     }
 
     const findUser = await db.query(
-      "SELECT id, email, password from users WHERE email = $1",
+      "SELECT id, email, password, role from users WHERE email = $1",
       [email]
     );
 
-    if (findUser?.rows[0]?.email !== email) {
+    if (findUser?.rows.length < 1) {
       return next(new ErrorHandler("User not found, Please check the email"));
     }
 
@@ -82,15 +83,28 @@ export const loginUser = CatchAsyncError(async (req, res, next) => {
         );
 
         // generate cookie
-        res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
 
-        // console.log("user", JSON.stringify(findUser.rows, null, 2));
-        // console.log(token);
+        // Save the token, user ID, and user role in a secure cookie
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 1 * 24 * 60 * 60 * 1000,
+        });
+
+        res.cookie("user_id", findUser.rows[0].id.toString(), {
+          httpOnly: true,
+          maxAge: 1 * 24 * 60 * 60 * 1000,
+        });
+
+        res.cookie("user_role", findUser.rows[0].role, {
+          httpOnly: true,
+          maxAge: 1 * 24 * 60 * 60 * 1000,
+        });
 
         // send user data
         return res.status(201).json({
           status: true,
           message: "Login Successful!",
+          result: token,
         });
       } else {
         return res.status(401).json({
@@ -107,7 +121,20 @@ export const loginUser = CatchAsyncError(async (req, res, next) => {
 // logout user
 export const logoutUser = CatchAsyncError(async (req, res, next) => {
   try {
-    res.cookie("jwt", "", { maxAge: 1 });
+    res.cookie("token", "", {
+      httpOnly: true,
+      maxAge: new Date(0),
+    });
+
+    res.cookie("user_id", "", {
+      httpOnly: true,
+      maxAge: new Date(0),
+    });
+
+    res.cookie("user_role", "", {
+      httpOnly: true,
+      maxAge: new Date(0),
+    });
 
     res.status(201).json({
       success: true,

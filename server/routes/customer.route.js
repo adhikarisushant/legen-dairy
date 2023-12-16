@@ -14,7 +14,7 @@ customerRouter.post("/customer", isAuthenticated, createCustomer);
 
 customerRouter.put("/customer/edit/:id", isAuthenticated, editCustomer);
 
-customerRouter.delete("/customer/delete/:id", isAuthenticated, deleteCustomer);
+customerRouter.put("/customer/delete/:id", isAuthenticated, deleteCustomer);
 
 customerRouter.get("/customer/single/:id", isAuthenticated, getSingleCustomer);
 

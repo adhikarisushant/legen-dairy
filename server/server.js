@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { ErrorMiddleware } from "./middleware/error.js";
 import userRouter from "./routes/user.route.js";
 import customerRouter from "./routes/customer.route.js";
+import vendorRouter from "./routes/vendor.route.js";
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use("/api/v1", userRouter, customerRouter);
+app.use("/api/v1", userRouter, customerRouter, vendorRouter);
 
 // testing api
 app.get("/test", async (req, res, next) => {

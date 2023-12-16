@@ -61,8 +61,6 @@ export const editVendor = CatchAsyncError(async (req, res, next) => {
       [name, contact, address, status, cow_price, buff_price, user, id]
     );
 
-    console.log(edit.rows);
-
     res.status(201).json({
       status: true,
       message: "Vendor updated successfully",

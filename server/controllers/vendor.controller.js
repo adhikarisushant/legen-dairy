@@ -221,7 +221,7 @@ export const getAllVendorTransactions = CatchAsyncError(
       const id = req.params.id;
 
       const result = await db.query(
-        "SELECT * FROM vendor_transactions WHERE vendor_id= $1",
+        "SELECT * FROM vendor_transactions WHERE vendor_id= $1 AND status= true",
         [id]
       );
 

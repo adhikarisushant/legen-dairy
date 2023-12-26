@@ -1,7 +1,9 @@
 import React from "react";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <div className="w-full flex items-center justify-center">HomePage</div>
+  );
 };
 
 export default HomePage;

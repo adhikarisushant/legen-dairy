@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import db from "../db/index.js";
 import { CatchAsyncError } from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import cookie from "cookie";
 
 export const registerUser = CatchAsyncError(async (req, res, next) => {
   try {
@@ -53,7 +52,7 @@ export const loginUser = CatchAsyncError(async (req, res, next) => {
     }
 
     const findUser = await db.query(
-      "SELECT id, email, password, role from users WHERE email = $1",
+      "SELECT id, name, email, password, role from users WHERE email = $1",
       [email]
     );
 
@@ -104,7 +103,12 @@ export const loginUser = CatchAsyncError(async (req, res, next) => {
         return res.status(201).json({
           status: true,
           message: "Login Successful!",
-          result: token,
+          user: {
+            id: findUser.rows[0].id,
+            name: findUser.rows[0].name,
+            email: findUser.rows[0].email,
+            role: findUser.rows[0].role,
+          },
         });
       } else {
         return res.status(401).json({
@@ -156,6 +160,26 @@ export const getAllUsers = CatchAsyncError(async (req, res, next) => {
       data: {
         users: getUsers.rows,
       },
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 400));
+  }
+});
+
+// load user
+export const getUser = CatchAsyncError(async (req, res, next) => {
+  try {
+    const user = await db.query(
+      "SELECT id, name, email, role from users WHERE id = $1",
+      [req.cookies.user_id]
+    );
+
+    if (!user) {
+      return next(new ErrorHandler("User doesn't exists", 400));
+    }
+    res.status(201).json({
+      status: true,
+      user: user.rows[0],
     });
   } catch (error) {
     return next(new ErrorHandler(error.message, 400));

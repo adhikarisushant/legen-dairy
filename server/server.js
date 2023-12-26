@@ -13,7 +13,13 @@ import productRoute from "./routes/product.route.js";
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(cors());
+// cors
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

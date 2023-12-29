@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { HomePage, LoginPage } from "./routes/Routes";
+import { Buy, HomePage, LoginPage } from "./routes/Routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Layout from "./pages/Layout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { loadUser } from "./redux/actions/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loadVendors } from "./redux/actions/vendor";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(loadVendors());
   }, []);
 
   return (
@@ -28,6 +30,7 @@ function App() {
         >
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<HomePage />} />
+          <Route path="/buy" element={<Buy />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

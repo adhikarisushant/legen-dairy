@@ -1,12 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Sidebar from "../components/Admin/Sidebar";
 import Header from "../components/Admin/Header";
 
 const Layout = () => {
-  const { user } = useSelector((state) => state.user);
-  console.log("user->", typeof user);
   return (
     <div>
       <div className="flex min-h-[100vh]">

@@ -89,7 +89,9 @@ export const getSingleVendor = CatchAsyncError(async (req, res, next) => {
 
 export const getAllVendors = CatchAsyncError(async (req, res, next) => {
   try {
-    const result = await db.query("SELECT * FROM vendors WHERE status = true;");
+    const result = await db.query(
+      "SELECT id, name, cow_price, buff_price FROM vendors WHERE status = true;"
+    );
 
     res.status(201).json({
       status: true,

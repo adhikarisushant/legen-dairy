@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { createVendorTransaction } from "../redux/actions/vendor";
-import { useNavigate } from "react-router-dom";
 
 const Buy = () => {
   const { vendors, success, error, loading } = useSelector(
     (state) => state.vendor
   );
-  const navigate = useNavigate();
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
@@ -40,8 +38,6 @@ const Buy = () => {
     setPrice("");
     setAmount("");
     setLactometer(0);
-    setProduct("");
-    setVendor("");
   };
 
   const calcAmount = () => {
@@ -79,13 +75,11 @@ const Buy = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error("error");
+      toast.error(error);
       clear();
     }
     if (success) {
       toast.success("Transaction created successfully!");
-      // navigate("/");
-      // window.location.reload();
       clear();
     }
   }, [dispatch, error, success]);

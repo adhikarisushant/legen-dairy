@@ -17,15 +17,15 @@ export const vendorReducer = createReducer(initialState, {
 
   // create Vendor Transaction
   vendorTransactionCreateRequest: (state) => {
-    state.isLoading = true;
+    state.loading = true;
   },
   vendorTransactionCreateSuccess: (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.vendorTransaction = action.payload;
     state.success = true;
   },
   vendorTransactionCreateFail: (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = action.payload;
     state.success = false;
   },

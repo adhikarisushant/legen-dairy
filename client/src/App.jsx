@@ -9,6 +9,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import { loadUser } from "./redux/actions/user";
 import { useDispatch, useSelector } from "react-redux";
 import { loadVendors } from "./redux/actions/vendor";
+import { loadProducts } from "./redux/actions/product";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
   useEffect(() => {
     dispatch(loadUser());
     dispatch(loadVendors());
+    dispatch(loadProducts());
   }, []);
 
   return (

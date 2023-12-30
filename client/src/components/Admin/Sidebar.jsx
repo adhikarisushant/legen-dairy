@@ -172,8 +172,8 @@ const Sidebar = () => {
             />
 
             <Item
-              title="Sell"
-              to="/shops"
+              title="Sale"
+              to="/sale"
               icon={<StorefrontIcon />}
               selected={selected}
               setSelected={setSelected}

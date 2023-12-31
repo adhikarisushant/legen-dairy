@@ -41,6 +41,33 @@ export const createVendor = (newForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CreateVendorFail",
+      payload: error.response.message,
+    });
+  }
+};
+
+// edit vendor
+export const editVendor = (newForm) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "EditVendorRequest",
+    });
+
+    const { data } = await axios.put(
+      `${server}/vendor/edit/${newForm.id}`,
+      newForm,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: "EditVendorSuccess",
+      payload: data.result[0],
+    });
+  } catch (error) {
+    dispatch({
+      type: "EditVendorFail",
       payload: error.message,
     });
   }

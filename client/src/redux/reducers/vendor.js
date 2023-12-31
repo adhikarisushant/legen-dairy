@@ -30,6 +30,20 @@ export const vendorReducer = createReducer(initialState, {
     state.success = false;
   },
 
+  // edit vendor
+  EditVendorRequest: (state) => {
+    state.loading = true;
+  },
+  EditVendorSuccess: (state) => {
+    state.loading = false;
+    state.success = true;
+  },
+  EditVendorFail: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+    state.success = false;
+  },
+
   // create Vendor Transaction
   vendorTransactionCreateRequest: (state) => {
     state.loading = true;

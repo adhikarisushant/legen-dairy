@@ -29,7 +29,7 @@ export const createVendor = CatchAsyncError(async (req, res, next) => {
     }
 
     const result = await db.query(
-      "INSERT INTO vendors (name, contact, address, created_by, cow_price, buff_price, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *",
+      "INSERT INTO vendors (name, contact, address, created_by, cow_price, buff_price, created_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING id, name, cow_price, buff_price, contact, address, status",
       [name, contact, address, user, cow_price, buff_price]
     );
 
@@ -90,7 +90,7 @@ export const getSingleVendor = CatchAsyncError(async (req, res, next) => {
 export const getAllVendors = CatchAsyncError(async (req, res, next) => {
   try {
     const result = await db.query(
-      "SELECT id, name, cow_price, buff_price FROM vendors WHERE status = true;"
+      "SELECT id, name, cow_price, buff_price, contact, address, status FROM vendors WHERE status = true;"
     );
 
     res.status(201).json({

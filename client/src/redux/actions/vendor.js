@@ -23,6 +23,29 @@ export const loadVendors = () => async (dispatch) => {
   }
 };
 
+// create new vendor
+export const createVendor = (newForm) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "CreateVendorRequest",
+    });
+
+    const { data } = await axios.post(`${server}/vendor`, newForm, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "CreateVendorSuccess",
+      payload: data.result[0],
+    });
+  } catch (error) {
+    dispatch({
+      type: "CreateVendorFail",
+      payload: error.message,
+    });
+  }
+};
+
 // create vendor transaction
 export const createVendorTransaction = (newForm) => async (dispatch) => {
   try {

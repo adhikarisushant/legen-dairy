@@ -1,6 +1,14 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Buy, HomePage, LoginPage, Sell } from "./routes/Routes";
+import {
+  Buy,
+  HomePage,
+  LoginPage,
+  Sell,
+  Vendor,
+  VendorCreate,
+  VendorEdit,
+} from "./routes/Routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -36,13 +44,16 @@ function App() {
           <Route path="/dashboard" element={<HomePage />} />
           <Route path="/buy" element={<Buy />} />
           <Route path="/sale" element={<Sell />} />
+          <Route path="/vendors" element={<Vendor />} />
+          <Route path="/vendors/edit/:id" element={<VendorEdit />} />
+          <Route path="/vendors/create" element={<VendorCreate />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
       <ToastContainer
-        position="bottom-center"
+        position="top-center"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

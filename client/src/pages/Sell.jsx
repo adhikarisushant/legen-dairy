@@ -82,8 +82,6 @@ const Sell = () => {
     <div className="w-full min-h-[90vh] flex items-start justify-center">
       <div className="flex flex-col items-center justify-center w-full min-h-[200px] mx-8 my-6 rounded-2xl shadow-xl bg-[#f2f2f2]">
         <h4 className="pt-6 text-2xl font-semibold text-blue-700">Sale</h4>
-        <h3>{customer?.value}</h3>
-        <h3>{product?.value}</h3>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-wrap items-start justify-start gap-8 p-10">
             <div className="w-[30%]">

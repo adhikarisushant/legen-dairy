@@ -69,9 +69,7 @@ export const editProduct = CatchAsyncError(async (req, res, next) => {
 
 export const getAllProducts = CatchAsyncError(async (req, res, next) => {
   try {
-    const result = await db.query(
-      "SELECT * FROM products WHERE status = true;"
-    );
+    const result = await db.query("SELECT * FROM products;");
 
     res.status(201).json({
       status: true,

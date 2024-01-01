@@ -90,9 +90,7 @@ export const getSingleCustomer = CatchAsyncError(async (req, res, next) => {
 
 export const getAllCustomers = CatchAsyncError(async (req, res, next) => {
   try {
-    const result = await db.query(
-      "SELECT * FROM customers WHERE status= true;"
-    );
+    const result = await db.query("SELECT * FROM customers");
 
     res.status(201).json({
       status: true,

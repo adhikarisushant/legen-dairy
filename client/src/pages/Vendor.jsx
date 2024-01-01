@@ -31,9 +31,22 @@ const Vendor = () => {
         size: 200,
       },
       {
-        accessorFn: (status) => `${status ? "Active" : "Inactive"} `,
+        accessorKey: "status",
         header: "Status",
         size: 200,
+        Cell: ({ cell }) => (
+          <div>
+            {cell.getValue() ? (
+              <div className="bg-green-700 max-w-[60px] p-1 flex items-center justify-center rounded-2xl">
+                <p className="text-white">Active</p>
+              </div>
+            ) : (
+              <div className="bg-red-700 max-w-[65px] p-1 flex items-center justify-center rounded-2xl">
+                <p className="text-white">Inactive</p>
+              </div>
+            )}
+          </div>
+        ),
       },
       {
         accessorKey: "id",

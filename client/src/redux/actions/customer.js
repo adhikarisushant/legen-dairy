@@ -23,6 +23,53 @@ export const loadCustomers = () => async (dispatch) => {
   }
 };
 
+// create new customer
+export const createCustomer = (newForm) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "CreateCustomerRequest",
+    });
+
+    const { data } = await axios.post(`${server}/customer`, newForm, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "CreateCustomerSuccess",
+      payload: data.result[0],
+    });
+  } catch (error) {
+    dispatch({
+      type: "CreateCustomerFail",
+      payload: error.response.message,
+    });
+  }
+};
+
+// edit customer
+export const editCustomer = (newForm) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "EditCustomerRequest",
+    });
+
+    const { data } = await axios.put(
+      `${server}/customer/edit/${newForm.id}`,
+      newForm,
+      { withCredentials: true }
+    );
+
+    dispatch({
+      type: "EditCustomerSuccess",
+    });
+  } catch (error) {
+    dispatch({
+      type: "EditCustomerFail",
+      payload: error.response.message,
+    });
+  }
+};
+
 // create customer transaction
 export const createCustomerTransaction = (newForm) => async (dispatch) => {
   try {

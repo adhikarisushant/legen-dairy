@@ -63,7 +63,6 @@ export const editVendor = (newForm) => async (dispatch) => {
 
     dispatch({
       type: "EditVendorSuccess",
-      payload: data.result[0],
     });
   } catch (error) {
     dispatch({

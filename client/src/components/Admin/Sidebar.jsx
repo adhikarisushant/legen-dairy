@@ -188,7 +188,7 @@ const Sidebar = () => {
             />
             <Item
               title="Customers"
-              to="/admin/create-course"
+              to="/customers"
               icon={<VideoCallIcon />}
               selected={selected}
               setSelected={setSelected}

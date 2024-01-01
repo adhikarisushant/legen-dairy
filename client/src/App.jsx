@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   Buy,
+  Customer,
+  CustomerCreate,
+  CustomerEdit,
   HomePage,
   LoginPage,
   Sell,
@@ -47,6 +50,9 @@ function App() {
           <Route path="/vendors" element={<Vendor />} />
           <Route path="/vendors/edit/:id" element={<VendorEdit />} />
           <Route path="/vendors/create" element={<VendorCreate />} />
+          <Route path="/customers" element={<Customer />} />
+          <Route path="/customers/create" element={<CustomerCreate />} />
+          <Route path="/customers/edit/:id" element={<CustomerEdit />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

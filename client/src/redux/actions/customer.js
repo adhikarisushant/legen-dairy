@@ -41,7 +41,7 @@ export const createCustomer = (newForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CreateCustomerFail",
-      payload: error.response.message,
+      payload: error.message,
     });
   }
 };
@@ -65,7 +65,7 @@ export const editCustomer = (newForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "EditCustomerFail",
-      payload: error.response.message,
+      payload: error.message,
     });
   }
 };

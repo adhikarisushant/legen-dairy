@@ -7,6 +7,9 @@ import {
   CustomerEdit,
   HomePage,
   LoginPage,
+  Product,
+  ProductCreate,
+  ProductEdit,
   Sell,
   Vendor,
   VendorCreate,
@@ -53,6 +56,9 @@ function App() {
           <Route path="/customers" element={<Customer />} />
           <Route path="/customers/create" element={<CustomerCreate />} />
           <Route path="/customers/edit/:id" element={<CustomerEdit />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/products/create" element={<ProductCreate />} />
+          <Route path="/products/edit/:id" element={<ProductEdit />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

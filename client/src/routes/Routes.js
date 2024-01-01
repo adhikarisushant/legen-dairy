@@ -8,6 +8,9 @@ import VendorCreate from "../pages/VendorCreate";
 import CustomerCreate from "../pages/CustomerCreate";
 import Customer from "../pages/Customer";
 import CustomerEdit from "../pages/CustomerEdit";
+import Product from "../pages/Product";
+import ProductCreate from "../pages/ProductCreate";
+import ProductEdit from "../pages/ProductEdit";
 
 export {
   LoginPage,
@@ -20,4 +23,7 @@ export {
   Customer,
   CustomerCreate,
   CustomerEdit,
+  Product,
+  ProductCreate,
+  ProductEdit,
 };

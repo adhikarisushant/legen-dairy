@@ -41,7 +41,7 @@ export const createVendor = (newForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "CreateVendorFail",
-      payload: error.response.message,
+      payload: error.message,
     });
   }
 };
@@ -90,7 +90,7 @@ export const createVendorTransaction = (newForm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "vendorTransactionCreateFail",
-      payload: error.response.message,
+      payload: error.message,
     });
   }
 };

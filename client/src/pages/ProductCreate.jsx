@@ -4,7 +4,7 @@ import { createProduct } from "../redux/actions/product";
 import { toast } from "react-toastify";
 
 const ProductCreate = () => {
-  const { error, loading, success } = useSelector((state) => state.product);
+  const { loading } = useSelector((state) => state.product);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
 
@@ -15,17 +15,6 @@ const ProductCreate = () => {
     setPrice("");
   };
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clear();
-    }
-    if (success) {
-      toast.success("Product Created");
-      clear();
-    }
-  }, [error, success]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newForm = {
@@ -33,6 +22,7 @@ const ProductCreate = () => {
       price: price,
     };
     dispatch(createProduct(newForm));
+    clear();
   };
 
   return (

@@ -5,9 +5,7 @@ import { toast } from "react-toastify";
 import { createCustomerTransaction } from "../redux/actions/customer";
 
 const Sell = () => {
-  const { customers, success, error, loading } = useSelector(
-    (state) => state.customer
-  );
+  const { customers, loading } = useSelector((state) => state.customer);
   const { products } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
@@ -44,17 +42,6 @@ const Sell = () => {
     }
   }, [product, quantity]);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clear();
-    }
-    if (success) {
-      toast.success("Transaction created successfully!");
-      clear();
-    }
-  }, [error, success]);
-
   const clear = () => {
     setQuantity("");
     setPrice("");
@@ -76,6 +63,7 @@ const Sell = () => {
     };
 
     dispatch(createCustomerTransaction(newForm));
+    clear();
   };
 
   return (

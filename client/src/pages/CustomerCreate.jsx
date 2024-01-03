@@ -4,7 +4,7 @@ import { createCustomer } from "../redux/actions/customer";
 import { toast } from "react-toastify";
 
 const CustomerCreate = () => {
-  const { error, loading, success } = useSelector((state) => state.customer);
+  const { loading } = useSelector((state) => state.customer);
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
@@ -16,17 +16,6 @@ const CustomerCreate = () => {
     setAddress("");
   };
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clear();
-    }
-    if (success) {
-      toast.success("Customer Created");
-      clear();
-    }
-  }, [error, success]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newForm = {
@@ -35,6 +24,7 @@ const CustomerCreate = () => {
       address: address,
     };
     dispatch(createCustomer(newForm));
+    clear();
   };
 
   return (

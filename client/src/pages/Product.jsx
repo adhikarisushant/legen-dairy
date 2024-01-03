@@ -82,7 +82,7 @@ const Product = () => {
           </button>
         </div>
 
-        <div className="pb-6">
+        <div className="pb-6 max-w-[80%]">
           <MaterialReactTable table={table} />
         </div>
       </div>

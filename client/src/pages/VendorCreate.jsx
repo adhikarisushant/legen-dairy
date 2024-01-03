@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { createVendor } from "../redux/actions/vendor";
 
 const VendorCreate = () => {
-  const { error, loading, success } = useSelector((state) => state.vendor);
+  const { loading } = useSelector((state) => state.vendor);
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
@@ -21,17 +21,6 @@ const VendorCreate = () => {
     setBuff("");
   };
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clear();
-    }
-    if (success) {
-      toast.success("Vendor Created");
-      clear();
-    }
-  }, [error, success]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newForm = {
@@ -42,6 +31,7 @@ const VendorCreate = () => {
       buff_price: buff || "0",
     };
     dispatch(createVendor(newForm));
+    clear();
   };
 
   return (

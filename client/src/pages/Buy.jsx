@@ -5,9 +5,7 @@ import { toast } from "react-toastify";
 import { createVendorTransaction } from "../redux/actions/vendor";
 
 const Buy = () => {
-  const { vendors, success, error, loading } = useSelector(
-    (state) => state.vendor
-  );
+  const { vendors, loading } = useSelector((state) => state.vendor);
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
@@ -75,17 +73,6 @@ const Buy = () => {
     }
   }, [vendor, product, quantity]);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clear();
-    }
-    if (success) {
-      toast.success("Transaction created successfully!");
-      clear();
-    }
-  }, [error, success]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,6 +87,7 @@ const Buy = () => {
     };
 
     dispatch(createVendorTransaction(newForm));
+    clear();
   };
 
   return (

@@ -50,6 +50,25 @@ const Customer = () => {
       },
       {
         accessorKey: "id",
+        header: "Transactions",
+        size: 200,
+        Cell: ({ cell }) => (
+          <Box sx={{ "& button": { m: 1 } }}>
+            <Button
+              variant="contained"
+              size="small"
+              color="success"
+              onClick={() =>
+                navigate(`/customers/transactions/${cell.getValue()}`)
+              }
+            >
+              Transactions
+            </Button>
+          </Box>
+        ),
+      },
+      {
+        accessorKey: "id",
         header: "Update",
         size: 150,
         Cell: ({ cell }) => (
@@ -87,7 +106,7 @@ const Customer = () => {
           </button>
         </div>
 
-        <div className="pb-6">
+        <div className="pb-6 max-w-[80%]">
           <MaterialReactTable table={table} />
         </div>
       </div>

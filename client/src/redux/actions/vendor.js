@@ -1,5 +1,6 @@
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 // load vendors
 export const loadVendors = () => async (dispatch) => {
@@ -38,11 +39,13 @@ export const createVendor = (newForm) => async (dispatch) => {
       type: "CreateVendorSuccess",
       payload: data.result[0],
     });
+    toast.success("Vendor created successfully!");
   } catch (error) {
     dispatch({
       type: "CreateVendorFail",
       payload: error.message,
     });
+    toast.error(error.message);
   }
 };
 
@@ -87,10 +90,12 @@ export const createVendorTransaction = (newForm) => async (dispatch) => {
       type: "vendorTransactionCreateSuccess",
       payload: data.result,
     });
+    toast.success("Transaction created successfully!");
   } catch (error) {
     dispatch({
       type: "vendorTransactionCreateFail",
       payload: error.message,
     });
+    toast.error(error.message);
   }
 };
